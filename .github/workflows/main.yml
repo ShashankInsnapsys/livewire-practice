@@ -41,14 +41,16 @@ jobs:
       continue-on-error: true
 
     - name: Check Composer vulnerabilities
-      run: composer audit --format=json > composer-outdated.json
+      run: composer audit --format=json > composer-audit.json
       continue-on-error: true
 
     - name: Check if Vulnerabilities are present
       id: condition
       run: |
-        VALUE=$(cat composer-outdated.json | jq -r '.advisories')
-        echo "Extracted Value: $VALUE"
+        COMPOSER_REPORT=$(cat composer-audit.json | jq -r '.advisories')
+        NPM_REPORT=$(cat npm-audit.json | jq -r '.total')
+        echo "Extracted Value of composer audit: $COMPOSER_REPORT"
+        echo "Extracted value of npm audit: $NPM_REPORT"
         #if [ "$(cat npm-audit.md)" != "" ] || [ "$(cat composer-outdated.md)" != "" ]; then
           #echo "::set-output name=isVulnerabilitiesPresent::true"
           #echo "NPM Vulnerabilities Audit $(cat npm-audit.md) Composer Vulnerabilities Audit $(cat composer-outdated.md)" >> issue_body.md
