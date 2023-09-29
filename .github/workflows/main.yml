@@ -56,7 +56,7 @@ jobs:
         NPM_AUDIT_VULNERABILITIES_high=$(echo $NPM_AUDIT_VULNERABILITIES | jq -r '.high')
         NPM_AUDIT_VULNERABILITIES_critical=$(echo $NPM_AUDIT_VULNERABILITIES | jq -r '.critical')
         echo "Extracted Value of composer audit: $COMPOSER_REPORT"
-        echo 'Extracted value of npm audit: $(python -c "print($NPM_AUDIT_VULNERABILITIES_info + $NPM_AUDIT_VULNERABILITIES_low + $NPM_AUDIT_VULNERABILITIES_moderate + $NPM_AUDIT_VULNERABILITIES_high + $NPM_AUDIT_VULNERABILITIES_critical)")'
+        echo "Extracted value of npm audit: $(python -c 'print($NPM_AUDIT_VULNERABILITIES_info + $NPM_AUDIT_VULNERABILITIES_low + $NPM_AUDIT_VULNERABILITIES_moderate + $NPM_AUDIT_VULNERABILITIES_high + $NPM_AUDIT_VULNERABILITIES_critical)')"
         #if [ "$(cat npm-audit.md)" != "" ] || [ "$(cat composer-outdated.md)" != "" ]; then
           #echo "::set-output name=isVulnerabilitiesPresent::true"
           #echo "NPM Vulnerabilities Audit $(cat npm-audit.md) Composer Vulnerabilities Audit $(cat composer-outdated.md)" >> issue_body.md
