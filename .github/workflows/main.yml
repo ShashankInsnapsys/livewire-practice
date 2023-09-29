@@ -41,7 +41,7 @@ jobs:
       continue-on-error: true
 
     - name: Check Composer vulnerabilities
-      run: composer audit --all --format=json > composer-outdated.json
+      run: composer audit --format=json > composer-outdated.json
       continue-on-error: true
 
     - name: Check if Vulnerabilities are present
