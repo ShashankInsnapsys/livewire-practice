@@ -52,7 +52,7 @@ jobs:
         NPM_AUDIT_VULNERABILITIES=$(echo $NPM_AUDIT_METADATA | jq -r '.vulnerabilities')
         NPM_AUDIT_TOTAL=$(echo $NPM_AUDIT_VULNERABILITIES | jq -r '.total')
         echo "Extracted Value of composer audit: $COMPOSER_REPORT"
-        echo "Extracted value of npm audit: $NPM_AUDIT_TOTAL"
+        echo "Extracted value of npm audit: $NPM_AUDIT_METADATA"
         #if [ "$(cat npm-audit.md)" != "" ] || [ "$(cat composer-outdated.md)" != "" ]; then
           #echo "::set-output name=isVulnerabilitiesPresent::true"
           #echo "NPM Vulnerabilities Audit $(cat npm-audit.md) Composer Vulnerabilities Audit $(cat composer-outdated.md)" >> issue_body.md
