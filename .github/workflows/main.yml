@@ -57,9 +57,8 @@ jobs:
         NPM_AUDIT_VULNERABILITIES_critical=$(echo $NPM_AUDIT_VULNERABILITIES | jq -r '.critical')
         TOTAL=$(python -c "print($NPM_AUDIT_VULNERABILITIES_info + $NPM_AUDIT_VULNERABILITIES_low + $NPM_AUDIT_VULNERABILITIES_moderate + $NPM_AUDIT_VULNERABILITIES_high + $NPM_AUDIT_VULNERABILITIES_critical)")
         echo "Extracted Value of composer audit: $COMPOSER_REPORT"
-        echo "critical: $NPM_AUDIT_VULNERABILITIES_critical"
         echo "Extracted value of npm audit: $TOTAL"
-        #if [ "$(cat npm-audit.md)" != "" ] || [ "$(cat composer-outdated.md)" != "" ]; then
+        if [ "$(cat npm-audit.md)" != "0" ] || [ "$(cat composer-audit.md)" != "[]" ]; then
           #echo "::set-output name=isVulnerabilitiesPresent::true"
           #echo "NPM Vulnerabilities Audit $(cat npm-audit.md) Composer Vulnerabilities Audit $(cat composer-outdated.md)" >> issue_body.md
           #echo "$(cat npm-audit.txt)" >> issue_body.txt
@@ -69,9 +68,11 @@ jobs:
           #echo "$(cat composer-outdated.txt)" >> issue_body.txt
           #cat issue_body.md
           #echo "::set-output name=issue_body::$(cat issue_body.md)"
-        #else
+          echo "TRUE"
+        else
+          echo "FALSE"
           #echo "::set-output name=isVulnerabilitiesPresent::false"
-        #fi
+        fi
     #- name: Create Issue
       #if: steps.condition.outputs.isVulnerabilitiesPresent == 'true'
       #env:
