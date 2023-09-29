@@ -58,7 +58,7 @@ jobs:
         TOTAL=$(python -c "print($NPM_AUDIT_VULNERABILITIES_info + $NPM_AUDIT_VULNERABILITIES_low + $NPM_AUDIT_VULNERABILITIES_moderate + $NPM_AUDIT_VULNERABILITIES_high + $NPM_AUDIT_VULNERABILITIES_critical)")
         echo "Extracted Value of composer audit: $COMPOSER_REPORT"
         echo "Extracted value of npm audit: $TOTAL"
-        if [ "$(cat npm-audit.md)" != "0" ] || [ "$(cat composer-audit.md)" != "[]" ]; then
+        if [ $TOTAL != "0" ] || [ $COMPOSER_REPORT != "[]" ]; then
           #echo "::set-output name=isVulnerabilitiesPresent::true"
           #echo "NPM Vulnerabilities Audit $(cat npm-audit.md) Composer Vulnerabilities Audit $(cat composer-outdated.md)" >> issue_body.md
           #echo "$(cat npm-audit.txt)" >> issue_body.txt
